@@ -186,7 +186,7 @@ def export_model(
             s3.upload_file(
                 local_path,
                 export_bucket,
-                f"models/{model_name}/{model_version}/{s3_path}",
+                f"models/{model_name}/{s3_path}",
                 ExtraArgs={"ACL": "public-read"},
             )
 
