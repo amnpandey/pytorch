@@ -32,16 +32,22 @@ def download_dataset(data_dir: str):
 def train_model(data_dir: str, model_dir: str):
     """Network class 2-hidden layer model using a pre-downloaded dataset.
     Once trained, the model is persisted to `model_dir`."""
-    
+
+    import subprocess
+    import sys
+    import time
     import numpy as np
     import pandas as pd
-    import os
-    import torch
+    import os 
     from sklearn.model_selection import train_test_split
     from sklearn.preprocessing import MinMaxScaler
     from sklearn import metrics
     from collections import Counter
 
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "torch"])
+    time.sleep(5)
+
+    import torch
     print(torch.__version__)
      
     data = pd.read_csv(data_dir+"/dataset.csv")
