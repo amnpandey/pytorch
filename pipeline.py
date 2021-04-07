@@ -72,20 +72,20 @@ def train_model(data_dir: str, model_dir: str):
     train_dl = torch.utils.data.DataLoader(train_ds, batch_size=bs)
     valid_dl = torch.utils.data.DataLoader(valid_ds, batch_size=bs)
 
-    class Classifier(torch.nn.Module):
+    class PyTorchModel(torch.nn.Module):
         def __init__(self, n_input=10, n_hidden = 20, n_output = 1,drop_prob=0.5):
             super().__init__()
             self.extractor1 = torch.nn.Linear(n_input, n_hidden)
             self.extractor2 = torch.nn.Linear(n_hidden, n_hidden)
             self.relu = torch.nn.ReLU()
             self.drop_out = torch.nn.Dropout(drop_prob)
-            self.classifier = torch.nn.Linear(n_hidden, n_output)
+            self.PyTorchModel = torch.nn.Linear(n_hidden, n_output)
 
         def forward(self, xb):
             x = self.relu(self.extractor1(xb))
             x = self.relu(self.extractor2(x))
             x = self.drop_out(x)
-            return self.classifier(x).squeeze()
+            return self.PyTorchModel(x).squeeze()
 
     def loss_batch(model, loss_func, xb, yb, opt=None):
         loss = loss_func(model(xb), yb)
@@ -118,7 +118,7 @@ def train_model(data_dir: str, model_dir: str):
     n_output = 1
     n_hidden = 15
 
-    model = Classifier(n_input=n_input,n_hidden=n_hidden,n_output=n_output,drop_prob=0.2)
+    model = PyTorchModel(n_input=n_input,n_hidden=n_hidden,n_output=n_output,drop_prob=0.2)
 
     #learning rate
     lr = 0.001
