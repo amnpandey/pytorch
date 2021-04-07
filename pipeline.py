@@ -42,7 +42,7 @@ def train_model(data_dir: str, model_dir: str):
     from sklearn.model_selection import train_test_split
     from sklearn.preprocessing import MinMaxScaler
     from sklearn import metrics
-    from collections import Counter
+    from pathlib import Path
 
     subprocess.check_call([sys.executable, "-m", "pip", "install", "torch"])
     time.sleep(5)
@@ -142,6 +142,8 @@ def train_model(data_dir: str, model_dir: str):
     print('Accuracy score: {}'.format(metrics.accuracy_score(ytest, ypred)))
     print(metrics.classification_report(ytest, ypred))
 
+    # Create directories if not exists
+    Path(model_dir).mkdir(parents=True, exist_ok=True)
     torch.save(model.state_dict(), model_dir+"/fraud-detection.pt")
     #with open(metrics_path+"/mlpipeline_metrics.json", "w") as f:
     #    json.dump(metrics, f)
