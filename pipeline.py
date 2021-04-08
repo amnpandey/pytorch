@@ -144,7 +144,7 @@ def train_model(data_dir: str, model_dir: str):
 
     # Create directories if not exists
     Path(model_dir).mkdir(parents=True, exist_ok=True)
-    torch.save(model.state_dict(), model_dir+"/fraud-detection.pt")
+    torch.save(model.state_dict(), model_dir+"/fraud-detection.pt", , _use_new_zipfile_serialization=False)
     #with open(metrics_path+"/mlpipeline_metrics.json", "w") as f:
     #    json.dump(metrics, f)
 
