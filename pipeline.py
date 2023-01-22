@@ -6,7 +6,7 @@ import kfp.dsl as dsl
 from kubernetes import client as k8s_client
 
 def download_dataset(data_dir: str):
-    """Added: Download the Fraud Detection data set to the KFP volume to share it among all steps"""
+    """Changed this line remote change Download the Fraud Detection data set to the KFP volume to share it among all steps"""
     import subprocess
     import sys
     import time
